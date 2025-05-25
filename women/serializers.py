@@ -1,0 +1,1 @@
+class WomenSerializer(serializers.ModelSerializer):

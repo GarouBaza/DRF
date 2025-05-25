@@ -1,3 +1,10 @@
+from rest_framework import generics
 from django.shortcuts import render
 
+from models import Women
 # Create your views here.
+
+
+class WomenApiView(generics):
+    queryset = Women.objects.all()
+    serializer_class = W
