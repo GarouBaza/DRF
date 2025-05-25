@@ -12,3 +12,10 @@ class Wonem(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=100, db_index=True)
+
+    def __str__(self):
+        return self.name
