@@ -11,6 +11,7 @@ class WomenApiView(APIView):
         w = Women.objects.all()
         return Response({'posts': WomenSerializer(w, many=True).data})
 
+    #добавление
     def post(self, request):
         serializer = WomenSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -32,6 +33,7 @@ class WomenApiView(APIView):
         )
         return Response({'post': WomenSerializer(post_new).data})
 
+    #удаление
     def delete(self,request ,id):
         delete_object = Women.objects.filter(id=id).delete()
         if delete_object == 0:
