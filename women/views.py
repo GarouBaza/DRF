@@ -1,10 +1,28 @@
 from django.forms import model_to_dict
-from rest_framework import generics, status
+from rest_framework import generics, status, permissions
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .models import Women
 from .serializers import WomenSerializer  # или from women.serializers
+
+#
+# class WomenAPIList(generics.ListCreateAPIView):
+#     queryset = Women.objects.all()
+#     serializer_class = WomenSerializer
+#     permission_classes = (IsAuthenticatedOrReadOnly, )
+#
+# class WomenAPIUpdate(generics.RetrieveUpdateAPIView):
+#     queryset = Women.objects.all()
+#     serializer_class = WomenSerializer
+#
+#
+# class WomenAPIDestroy(generics.RetrieveDestroyAPIView):
+#     queryset = Women.objects.all()
+#     serializer_class = WomenSerializer
+
+
 
 class WomenApiView(APIView):
     def get(self, request):
@@ -34,7 +52,7 @@ class WomenApiView(APIView):
         return Response({'post': WomenSerializer(post_new).data})
 
     #удаление
-    def delete(self,request ,id):
+    def delete(self, request, id):
         delete_object = Women.objects.filter(id=id).delete()
         if delete_object == 0:
             return Response({'error': 'Women does not exist'}, status=status.HTTP_404_NOT_FOUND)
